@@ -20,7 +20,7 @@ lazy val core = project
       "javax.inject" % "javax.inject" % "1"
     ),
     name := "playjpa",
-    version := "1.0.0",
+    version := "1.0.1",
     organization := "com.fliptoo",
     autoScalaLibrary := false,
     crossPaths := false
@@ -31,7 +31,9 @@ lazy val plugin = project
   .dependsOn(core)
   .settings(
     name := "sbt-playjpa",
-    version := "1.0.0",
+    version := "1.0.1",
     organization := "com.fliptoo",
-    sbtPlugin := true
+    sbtPlugin := true,
+    autoScalaLibrary := false,
+    crossPaths := false
   )

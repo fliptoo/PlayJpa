@@ -1,17 +1,17 @@
-# PlayJPA
+# PlayJpa
 Play1 JPA Model for Play2
 
-Jave developer who familiar with JPA Model (Play 1) will like PlayJPA very much.
-Please refer [Play!](https://www.playframework.com/documentation/1.3.x/jpa#anamefindingFindingobjectsa) for more detail about the Model. Unfortunely [Explicit Save](https://www.playframework.com/documentation/1.3.x/jpa#anamesaveExplicitsavea) is not implemented as i am still thinking is it a good practice of hacking the normal JPA behaviour.
+Java developer who familiar with JPA Model (Play1) will like PlayJpa very much.
+Please refer [Play!](https://www.playframework.com/documentation/1.3.x/jpa#anamefindingFindingobjectsa) for more detail about the Model. Unfortunately [Explicit Save](https://www.playframework.com/documentation/1.3.x/jpa#anamesaveExplicitsavea) is not implemented yet.
 
 ## Installation
 Add plugin declarations into your plugins.sbt file:
 ```
-addSbtPlugin("com.fliptoo" % "sbt-playjpa" % "1.0.0")
+addSbtPlugin("com.fliptoo" % "sbt-playjpa" % "1.0.1")
 ```
 Add dependency declarations into your build.sbt file:
 ```
-"com.fliptoo" % "playjpa" % "1.0.0"
+"com.fliptoo" % "playjpa" % "1.0.1"
 ```
 ## Quick Start
 
@@ -30,7 +30,7 @@ public class User extends Model {
 }
 ```
 
-Do whatever as you did as Play 1
+Do whatever as you did as Play1
 ```
 public class Application extends Controller {
 
