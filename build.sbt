@@ -1,10 +1,12 @@
 lazy val root = project
   .in(file("."))
-  .aggregate(core, plugin)
   .settings(
     name := "playjpa-root",
-    scalaVersion := "2.11.8"
+    scalaVersion := "2.11.8",
+    publishLocal := {},
+    publish := {}
   )
+  .aggregate(core, plugin)
 
 lazy val core = project
   .in(file("playjpa"))
