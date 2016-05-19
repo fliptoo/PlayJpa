@@ -5,13 +5,13 @@ Jave developer who familiar with JPA Model (Play 1) will like PlayJPA very much.
 Please refer [Play!](https://www.playframework.com/documentation/1.3.x/jpa#anamefindingFindingobjectsa) for more detail about the Model. Unfortunely [Explicit Save](https://www.playframework.com/documentation/1.3.x/jpa#anamesaveExplicitsavea) is not implemented as i am still thinking is it a good practice of hacking the normal JPA behaviour.
 
 ## Installation
+Add plugin declarations into your plugins.sbt file:
+```
+addSbtPlugin("com.fliptoo" % "sbt-playjpa" % "1.0.0")
+```
 Add dependency declarations into your build.sbt file:
 ```
-"com.fliptoo" %% "playjpa" % "1.0-SNAPSHOT"
-```
-Enable PlayJPA in application.conf
-```
-play.modules.enabled += "com.fliptoo.play.jpa.Module"
+"com.fliptoo" % "playjpa" % "1.0.0"
 ```
 ## Quick Start
 
@@ -40,5 +40,25 @@ public class Application extends Controller {
         return ok(index.render("I am " + user.name));
     }
 
+}
+```
+
+## Extra Enhancer
+
+Simply create a class with suffix `_Enhancer` and extend `com.fliptoo.playjpa.Enhancer` to include extra enhancer for your custom Model.
+```
+public class CustomModel extends Model {
+
+    public static void searchAll() {
+        throw new UnsupportedOperationException("Please annotate your JPA model with @javax.persistence.Entity annotation.");
+    }
+}
+
+public class Custom_Enhancer extends Enhancer {
+
+    @Override
+    public void enhance(CtClass cc, String Entity, String Model, String JPAQuery, String JPQL) {
+        makeMethod("public static void searchAll() { Logger.info(\"Search All...\"); }", cc);
+    }
 }
 ```
