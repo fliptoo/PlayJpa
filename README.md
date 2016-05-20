@@ -14,7 +14,7 @@ Add dependency declarations into your build.sbt file:
 "com.fliptoo" % "playjpa" % "1.0.0" excludeAll(ExclusionRule(organization = "com.typesafe.play")
 ```
 ## Improvement
-This is my first time development on SBT Plugin, i am looking for a way to avoid using `excludeAll(ExclusionRule(organization = "com.typesafe.play"` due to `conflicting cross version suffixes`. Hopefully some one can assist on this improvement. Thanks a lot!
+I am looking for a way to avoid using `excludeAll(ExclusionRule(organization = "com.typesafe.play"` due to `conflicting cross version suffixes`. Hopefully some one can assist on this improvement. Thanks a lot!
 
 ## Quick Start
 
