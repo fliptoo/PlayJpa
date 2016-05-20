@@ -54,10 +54,9 @@ public class PlayJpa {
         }
     }
 
-    private static final String Model = Model.class.getCanonicalName();
-    private static final String JPAQuery = JPQL.JPAQuery.class.getCanonicalName();
+    private static final String Model = com.fliptoo.playjpa.Model.class.getCanonicalName();
+    private static final String JPAQuery = com.fliptoo.playjpa.JPQL.JPAQuery.class.getCanonicalName();
     private static final String JPQL = JPQL.class.getCanonicalName();
-    private static final String Enhancer = Enhancer.class.getCanonicalName();
     private static final Enhancers enhancers = new Enhancers();
     private static List<ClassPathWithFile> entities = new ArrayList<>();
 
@@ -85,12 +84,12 @@ public class PlayJpa {
             cp.appendSystemPath();
             cp.appendPathList(classPath);
             CtClass model = cp.get(Model);
-            CtClass enhancer = cp.get(Enhancer);
+            CtClass enhancer = cp.get(Enhancer.class.getCanonicalName());
             try (FileInputStream is = new FileInputStream(classFile)) {
                 CtClass cc = cp.makeClass(is);
                 if (cc.subtypeOf(enhancer)) {
-                    enhancers.get().add((Enhancer) cp.getAndRename(cc.getName(),
-                            cc.getName() + "-" + UUID.randomUUID().toString()).toClass().newInstance());
+                    cc = cp.getAndRename(cc.getName(), cc.getName() + UUID.randomUUID().toString());
+                    enhancers.get().add((Enhancer) cc.toClass(Enhancer.class.getClassLoader(), null).newInstance());
                     return true;
                 }
                 if (!hasAnnotation(cc, Entity.class)) return false;

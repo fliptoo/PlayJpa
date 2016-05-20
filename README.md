@@ -7,12 +7,15 @@ Please refer [Play!](https://www.playframework.com/documentation/1.3.x/jpa#aname
 ## Installation
 Add plugin declarations into your plugins.sbt file:
 ```
-addSbtPlugin("com.fliptoo" % "sbt-playjpa" % "1.0.1")
+addSbtPlugin("com.fliptoo" % "sbt-playjpa" % "1.0.0" excludeAll(ExclusionRule(organization = "com.typesafe.play"))
 ```
 Add dependency declarations into your build.sbt file:
 ```
-"com.fliptoo" % "playjpa" % "1.0.1"
+"com.fliptoo" % "playjpa" % "1.0.0" excludeAll(ExclusionRule(organization = "com.typesafe.play")
 ```
+## Improvement
+This is my first time development on SBT Plugin, i am looking for a way to avoid using `excludeAll(ExclusionRule(organization = "com.typesafe.play"` due to `conflicting cross version suffixes`. Hopefully some one can assist on this improvement. Thanks a lot!
+
 ## Quick Start
 
 Extend your JPA entity with the Model class
