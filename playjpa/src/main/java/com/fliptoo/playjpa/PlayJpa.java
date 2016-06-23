@@ -1,10 +1,6 @@
 package com.fliptoo.playjpa;
 
 import javassist.*;
-import org.hibernate.Session;
-import org.hibernate.event.service.spi.EventListenerRegistry;
-import org.hibernate.event.spi.EventType;
-import org.hibernate.internal.SessionFactoryImpl;
 import play.Application;
 import play.db.jpa.JPAApi;
 
