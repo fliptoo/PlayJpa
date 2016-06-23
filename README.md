@@ -19,6 +19,7 @@ play.modules.enabled += "com.fliptoo.playjpa.Module"
 ```
 ## Improvement (DONE)
 This is my first time development on SBT Plugin, i am looking for a way to avoid using `excludeAll(ExclusionRule(organization = "com.typesafe.play"` due to `conflicting cross version suffixes`. Hopefully some one can assist on this improvement. Thanks a lot!
+
 Special thanks https://github.com/gslowikowski
 
 
