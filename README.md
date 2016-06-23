@@ -5,16 +5,22 @@ Java developer who familiar with JPA Model (Play1) will like PlayJpa very much.
 Please refer [Play!](https://www.playframework.com/documentation/1.3.x/jpa#anamefindingFindingobjectsa) for more detail about the Model. Unfortunately [Explicit Save](https://www.playframework.com/documentation/1.3.x/jpa#anamesaveExplicitsavea) is not implemented yet.
 
 ## Installation
-Add plugin declarations into your plugins.sbt file:
+plugins.sbt
 ```
-addSbtPlugin("com.fliptoo" % "sbt-playjpa" % "1.0.0" excludeAll(ExclusionRule(organization = "com.typesafe.play"))
+addSbtPlugin("com.fliptoo" % "sbt-playjpa" % "1.0.1")
 ```
-Add dependency declarations into your build.sbt file:
+build.sbt
 ```
-"com.fliptoo" % "playjpa" % "1.0.0" excludeAll(ExclusionRule(organization = "com.typesafe.play")
+"com.fliptoo" % "playjpa" % "1.0.1"
 ```
-## Improvement
-I am looking for a way to avoid using `excludeAll(ExclusionRule(organization = "com.typesafe.play"` due to `conflicting cross version suffixes`. Hopefully some one can assist on this improvement. Thanks a lot!
+conf/application.conf
+```
+play.modules.enabled += "com.fliptoo.playjpa.Module"
+```
+## Improvement (DONE)
+This is my first time development on SBT Plugin, i am looking for a way to avoid using `excludeAll(ExclusionRule(organization = "com.typesafe.play"` due to `conflicting cross version suffixes`. Hopefully some one can assist on this improvement. Thanks a lot!
+Special thanks https://github.com/gslowikowski
+
 
 ## Quick Start
 
