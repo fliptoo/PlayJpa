@@ -11,17 +11,15 @@ lazy val root = project
 
 lazy val core = project
   .in(file("playjpa"))
-  .enablePlugins(PlayJava)
   .settings(
     libraryDependencies ++= Seq(
-      javaJpa,
+      "com.typesafe.play" %% "play-java-jpa" % "2.5.4" % "provided",
       "org.hibernate" % "hibernate-entitymanager" % "5.1.0.Final",
-      "org.apache.commons" % "commons-lang3" % "3.4",
-      "javax.inject" % "javax.inject" % "1"
+      "org.apache.commons" % "commons-lang3" % "3.4"
     ),
     scalaVersion := "2.11.8",
     name := "playjpa",
-    version := "1.0.0",
+    version := "1.0.1-SNAPSHOT",
     organization := "com.fliptoo",
     autoScalaLibrary := false,
     crossPaths := false
@@ -32,7 +30,7 @@ lazy val plugin = project
   .dependsOn(core)
   .settings(
     name := "sbt-playjpa",
-    version := "1.0.0",
+    version := "1.0.1-SNAPSHOT",
     organization := "com.fliptoo",
     sbtPlugin := true,
     autoScalaLibrary := false,

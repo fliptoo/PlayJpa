@@ -87,6 +87,16 @@ public class Model {
     }
 
     /**
+     * Prepare a query to find one entity.
+     * @param query HQL query or shortcut
+     * @param params Params to bind to the query
+     * @return The entity
+     */
+    public static <T extends Model> T findOneBy(String query, Object[] params) {
+        throw new UnsupportedOperationException("Please annotate your JPA model with @javax.persistence.Entity annotation.");
+    }
+
+    /**
      * Prepare a query to find entities.
      * @param query HQL query or shortcut
      * @param params Params to bind to the query

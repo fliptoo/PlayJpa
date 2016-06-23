@@ -1,8 +1,14 @@
 package com.fliptoo.playjpa;
 
-import javassist.ClassPool;
-import javassist.CtClass;
+import javassist.*;
+import org.hibernate.Session;
+import org.hibernate.event.service.spi.EventListenerRegistry;
+import org.hibernate.event.spi.EventType;
+import org.hibernate.internal.SessionFactoryImpl;
+import play.Application;
+import play.db.jpa.JPAApi;
 
+import javax.inject.Inject;
 import javax.persistence.Entity;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +21,29 @@ import static com.fliptoo.playjpa.Enhancer.hasAnnotation;
 
 public class PlayJpa {
 
+    public static JPAApi jpaApi;
+    public static Application app;
+
+    public PlayJpa(JPAApi jpaApi, Application app) {
+        PlayJpa.jpaApi = jpaApi;
+        PlayJpa.app = app;
+    }
+
+    public static class Provider implements javax.inject.Provider<PlayJpa> {
+
+        final PlayJpa playJpa;
+
+        @Inject
+        public Provider(JPAApi jpaApi, Application app) {
+            this.playJpa = new PlayJpa(jpaApi, app);
+        }
+
+        @Override
+        public PlayJpa get() {
+            return playJpa;
+        }
+    }
+
     private static class Enhancers {
 
         private List<Enhancer> enhancers = new ArrayList<>();
@@ -24,6 +53,16 @@ public class PlayJpa {
 
                 @Override
                 public void enhance(CtClass cc, String Entity, String Model, String JPAQuery, String JPQL) {
+                    // Generate a no-argument constructor so that Hibernate can instantiate them using Constructor.newInstance()
+                    try {
+                        cc.getConstructor("()V");
+                    } catch (NotFoundException e) {
+                        try {
+                            cc.addConstructor(CtNewConstructor.defaultConstructor(cc));
+                        } catch (CannotCompileException ce) {
+                            ce.printStackTrace();
+                        }
+                    }
                     makeMethod("public static long count() { return " + JPQL + ".count(\"" + Entity + "\"); }", cc);
                     makeMethod("public static long count(String query, Object[] params) { return  " + JPQL + ".count(\"" + Entity + "\", query, params); }", cc);
                     makeMethod("public static java.util.List findAll() { return  " + JPQL + ".findAll(\"" + Entity + "\"); }", cc);
