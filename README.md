@@ -7,11 +7,11 @@ Please refer [Play!](https://www.playframework.com/documentation/1.3.x/jpa#aname
 ## Installation
 plugins.sbt
 ```
-addSbtPlugin("com.fliptoo" % "sbt-playjpa" % "1.0.1")
+addSbtPlugin("com.fliptoo" % "sbt-playjpa" % "1.0.3")
 ```
 build.sbt
 ```
-"com.fliptoo" % "playjpa" % "1.0.1"
+"com.fliptoo" % "playjpa" % "1.0.3"
 ```
 conf/application.conf
 ```
