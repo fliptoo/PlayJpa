@@ -22,8 +22,18 @@ public class JPQL {
         return PlayJpa.jpaApi.em().createQuery("select e from " + entity + " e").getResultList();
     }
 
-    public static Model findById(String entity, Object id) throws Exception {
-        return PlayJpa.jpaApi.em().find((Class<Model>) PlayJpa.app.classloader().loadClass(entity), id);
+    public static <T extends Model> T findById(String entity, Object id) throws Exception {
+        return (T) PlayJpa.jpaApi.em().find(PlayJpa.app.classloader().loadClass(entity), id);
+    }
+
+    public static <T extends Model> T findOneBy(String entity, String query, Object... params) {
+        Query q = PlayJpa.jpaApi.em().createQuery(
+                createFindByQuery(entity, entity, query, params));
+        List results = bindParameters(q, params).getResultList();
+        if (results.size() == 0) {
+            return null;
+        }
+        return (T) results.get(0);
     }
 
     public static List findBy(String entity, String query, Object[] params) {
@@ -60,16 +70,6 @@ public class JPQL {
         Query q = PlayJpa.jpaApi.em().createQuery(
                 createDeleteQuery(entity, entity, null));
         return bindParameters(q).executeUpdate();
-    }
-
-    public static Model findOneBy(String entity, String query, Object[] params) {
-        Query q = PlayJpa.jpaApi.em().createQuery(
-                createFindByQuery(entity, entity, query, params));
-        List results = bindParameters(q, params).getResultList();
-        if (results.size() == 0) {
-            return null;
-        }
-        return (Model) results.get(0);
     }
 
     public static String createFindByQuery(String entityName, String entityClass, String query, Object... params) {

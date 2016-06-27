@@ -1,10 +1,12 @@
 package com.fliptoo.playjpa;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.type.StringType;
+import org.hibernate.usertype.UserType;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.PreparedStatement;
@@ -12,20 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SessionImplementor;
-import org.hibernate.type.StringType;
-import org.hibernate.usertype.UserType;
-
-import play.Application;
-
-import javax.inject.Inject;
-
 public class Blob implements UserType {
-
-    @Inject
-    Application app;
 
     private String UUID;
     private String type;
@@ -171,7 +160,7 @@ public class Blob implements UserType {
     }
 
     public File getStore(String folder) {
-        String name = app.configuration().getString("playJPA.attachments.path");
+        String name = PlayJpa.app.configuration().getString("playJPA.attachments.path");
         if (StringUtils.isEmpty(name)) name = "data/attachments";
         if (folder != null && folder.length() > 0)
             name += File.separator + folder;
@@ -179,7 +168,7 @@ public class Blob implements UserType {
         if (new File(name).isAbsolute()) {
             store = new File(name);
         } else {
-            store = app.getFile(name);
+            store = PlayJpa.app.getFile(name);
         }
         if (!store.exists()) {
             store.mkdirs();
