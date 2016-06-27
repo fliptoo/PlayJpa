@@ -19,7 +19,7 @@ lazy val core = project
     ),
     scalaVersion := "2.11.8",
     name := "playjpa",
-    version := "1.0.2",
+    version := "1.0.3",
     organization := "com.fliptoo",
     autoScalaLibrary := false,
     crossPaths := false
@@ -30,7 +30,7 @@ lazy val plugin = project
   .dependsOn(core)
   .settings(
     name := "sbt-playjpa",
-    version := "1.0.2",
+    version := "1.0.3",
     organization := "com.fliptoo",
     sbtPlugin := true,
     autoScalaLibrary := false,

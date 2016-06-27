@@ -76,6 +76,16 @@ public class Model {
     }
 
     /**
+     * Find the entity with the corresponding id.
+     * @param id The entity id
+     * @param ignored a trick to solve SBT unknown exception if using single param (can not be converted error)
+     * @return The entity
+     */
+    public static <T extends Model> T findById(Object id, Object... ignored) {
+        throw new UnsupportedOperationException("Please annotate your JPA model with @javax.persistence.Entity annotation.");
+    }
+
+    /**
      * Prepare a query to find one entity.
      * @param query HQL query or shortcut
      * @param params Params to bind to the query

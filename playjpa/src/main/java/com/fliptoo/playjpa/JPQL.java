@@ -1,10 +1,10 @@
 package com.fliptoo.playjpa;
 
+import javax.persistence.Query;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import javax.persistence.Query;
 
 public class JPQL {
 

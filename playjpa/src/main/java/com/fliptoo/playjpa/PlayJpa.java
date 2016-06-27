@@ -59,16 +59,16 @@ public class PlayJpa {
                             ce.printStackTrace();
                         }
                     }
-
                     makeMethod("public static long count() { return " + JPQL + ".count(\"" + Entity + "\"); }", cc);
-                    makeMethod("public static long count(String query, Object[] params) { return  " + JPQL + ".count(\"" + Entity + "\", query, params); }", cc);
-                    makeMethod("public static java.util.List findAll() { return  " + JPQL + ".findAll(\"" + Entity + "\"); }", cc);
-                    makeMethod("public static " + Model + " findOneBy(String query, Object[] params) { return  " + JPQL + ".findOneBy(\"" + Entity + "\", query, params); }", cc);
-                    makeMethod("public static " + JPAQuery + " find(String query, Object[] params) { return  " + JPQL + ".find(\"" + Entity + "\", query, params); }", cc);
-                    makeMethod("public static " + JPAQuery + " find() { return  " + JPQL + ".find(\"" + Entity + "\"); }", cc);
-                    makeMethod("public static " + JPAQuery + " all() { return  " + JPQL + ".all(\"" + Entity + "\"); }", cc);
-                    makeMethod("public static int delete(String query, Object[] params) { return  " + JPQL + ".delete(\"" + Entity + "\", query, params); }", cc);
-                    makeMethod("public static int deleteAll() { return  " + JPQL + ".deleteAll(\"" + Entity + "\"); }", cc);
+                    makeMethod("public static long count(String query, Object[] params) { return " + JPQL + ".count(\"" + Entity + "\", query, params); }", cc);
+                    makeMethod("public static java.util.List findAll() { return " + JPQL + ".findAll(\"" + Entity + "\"); }", cc);
+                    makeMethod("public static " + Model + " findById(Object id, Object[] ignored) { return " + JPQL + ".findById(\"" + Entity + "\", id); }", cc);
+                    makeMethod("public static " + Model + " findOneBy(String query, Object[] params) { return " + JPQL + ".findOneBy(\"" + Entity + "\", query, params); }", cc);
+                    makeMethod("public static " + JPAQuery + " find(String query, Object[] params) { return " + JPQL + ".find(\"" + Entity + "\", query, params); }", cc);
+                    makeMethod("public static " + JPAQuery + " find() { return " + JPQL + ".find(\"" + Entity + "\"); }", cc);
+                    makeMethod("public static " + JPAQuery + " all() { return " + JPQL + ".all(\"" + Entity + "\"); }", cc);
+                    makeMethod("public static int delete(String query, Object[] params) { return " + JPQL + ".delete(\"" + Entity + "\", query, params); }", cc);
+                    makeMethod("public static int deleteAll() { return " + JPQL + ".deleteAll(\"" + Entity + "\"); }", cc);
                 }
             });
         }
