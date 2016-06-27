@@ -17,11 +17,8 @@ conf/application.conf
 ```
 play.modules.enabled += "com.fliptoo.playjpa.Module"
 ```
-## Improvement (DONE)
-This is my first time development on SBT Plugin, i am looking for a way to avoid using `excludeAll(ExclusionRule(organization = "com.typesafe.play"` due to `conflicting cross version suffixes`. Hopefully some one can assist on this improvement. Thanks a lot!
-
-Special thanks https://github.com/gslowikowski
-
+## Improvement
+Whenever declare a method with single parameter, SBT will throw compilation error during PlayReload. At this moment i can't find any solution, so i have to declare Model.findById(Object id, Object... ignored) instead of Model.findById(Object id)
 
 ## Quick Start
 
